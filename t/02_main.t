@@ -14,7 +14,7 @@ SCOPE: {
 	eval "
 	package Foo;
 
-	use Object::Tiny::Lvalue qw{ foo bar };
+	use Object::Tiny::Lvalue qw( foo bar );
 	";
 	ok( ! $@, 'Created package without error' );
 }
@@ -40,7 +40,7 @@ SCOPE: {
 	};
 	ok( $@, '->baz returns an error' );
 	is( $object->{baz}, 3, '->{baz} does contain value' );
-        $object->foo= 42;
+	$object->foo = 42;
 	is( $object->foo, 42, '->foo(new_value) ok' );
 }
 

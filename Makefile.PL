@@ -8,7 +8,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
 	NAME      => 'Object::Tiny::Lvalue',
-	ABSTRACT  => 'An lvalue accessor maker with as little code as possible',
+	ABSTRACT  => 'Minimal class builder with lvalue accessors',
 	VERSION   => $VERSION,
 	PREREQ_PM => {
 		# Skip on Windows to avoid breaking ActivePerl PPMs
@@ -16,9 +16,19 @@ WriteMakefile(
 		($^O eq 'MSWin32' ? () : ('Test::More' => '0.47')),
 	},
 	($] >= 5.005 ? (
-		AUTHOR  => 'Adam Kennedy <adamk@cpan.org>, ::Lvalue fork by Aristotle Pagaltzis',
+		AUTHOR  => 'Aristotle Pagaltzis <pagaltzis@gmx.de>',
 	) : ()),
 	($ExtUtils::MakeMaker::VERSION ge '6.30_00' ? (
 		LICENSE => 'perl',
+	) : ()),
+	($ExtUtils::MakeMaker::VERSION ge '6.45_01' ? (
+		META_MERGE => {
+			resources => {
+				license    => 'http://dev.perl.org/licenses/',
+				homepage   => 'http://github.com/ap/Object-Tiny-Lvalue',
+				bugtracker => 'http://github.com/ap/Object-Tiny-Lvalue/issues',
+				repository => 'git://github.com/ap/Object-Tiny-Lvalue.git',
+			}
+		},
 	) : ()),
 );
