@@ -1,27 +1,19 @@
---- #YAML:1.0
-name:               Object-Tiny-Lvalue
-version:            1.06
-abstract:           Minimal class builder with lvalue accessors
+---
+abstract: 'minimal class builder with lvalue accessors'
 author:
-    - Aristotle Pagaltzis <pagaltzis@gmx.de>
-license:            perl
-distribution_type:  module
+  - 'Aristotle Pagaltzis <pagaltzis@gmx.de>'
+build_requires: {}
 configure_requires:
-    ExtUtils::MakeMaker:  0
-build_requires:
-    ExtUtils::MakeMaker:  0
-requires:
-    Test::More:  0.47
-resources:
-    bugtracker:  http://github.com/ap/Object-Tiny-Lvalue/issues
-    homepage:    http://github.com/ap/Object-Tiny-Lvalue
-    license:     http://dev.perl.org/licenses/
-    repository:  git://github.com/ap/Object-Tiny-Lvalue.git
-no_index:
-    directory:
-        - t
-        - inc
-generated_by:       ExtUtils::MakeMaker version 6.50
+  ExtUtils::MakeMaker: 6.31
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.101550, CPAN::Meta::Converter version 2.101461'
+license: perl
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Object-Tiny-Lvalue
+resources:
+  bugtracker: http://github.com/ap/Object-Tiny-Lvalue/issues
+  homepage: http://github.com/ap/Object-Tiny-Lvalue
+  repository: git://github.com/ap/Object-Tiny-Lvalue
+version: 1.07

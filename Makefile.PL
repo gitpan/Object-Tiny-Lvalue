@@ -1,34 +1,49 @@
-use strict;
-use vars qw{$VERSION};
-BEGIN {
-	require 5.003_96;
-	$VERSION = '1.06';
-}
-use ExtUtils::MakeMaker;
 
-WriteMakefile(
-	NAME      => 'Object::Tiny::Lvalue',
-	ABSTRACT  => 'Minimal class builder with lvalue accessors',
-	VERSION   => $VERSION,
-	PREREQ_PM => {
-		# Skip on Windows to avoid breaking ActivePerl PPMs
-		# 0.47 means 5.6.2 or newer, which everyone on Win32 has.
-		($^O eq 'MSWin32' ? () : ('Test::More' => '0.47')),
-	},
-	($] >= 5.005 ? (
-		AUTHOR  => 'Aristotle Pagaltzis <pagaltzis@gmx.de>',
-	) : ()),
-	($ExtUtils::MakeMaker::VERSION ge '6.30_00' ? (
-		LICENSE => 'perl',
-	) : ()),
-	($ExtUtils::MakeMaker::VERSION ge '6.45_01' ? (
-		META_MERGE => {
-			resources => {
-				license    => 'http://dev.perl.org/licenses/',
-				homepage   => 'http://github.com/ap/Object-Tiny-Lvalue',
-				bugtracker => 'http://github.com/ap/Object-Tiny-Lvalue/issues',
-				repository => 'git://github.com/ap/Object-Tiny-Lvalue.git',
-			}
-		},
-	) : ()),
+use strict;
+use warnings;
+
+
+
+use ExtUtils::MakeMaker 6.31;
+
+
+
+my %WriteMakefileArgs = (
+  'ABSTRACT' => 'minimal class builder with lvalue accessors',
+  'AUTHOR' => 'Aristotle Pagaltzis <pagaltzis@gmx.de>',
+  'BUILD_REQUIRES' => {},
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.31'
+  },
+  'DISTNAME' => 'Object-Tiny-Lvalue',
+  'EXE_FILES' => [],
+  'LICENSE' => 'perl',
+  'NAME' => 'Object::Tiny::Lvalue',
+  'PREREQ_PM' => {},
+  'VERSION' => '1.07',
+  'test' => {
+    'TESTS' => 't/*.t'
+  }
 );
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+

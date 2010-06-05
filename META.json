@@ -1,0 +1,32 @@
+{
+   "abstract" : "minimal class builder with lvalue accessors",
+   "author" : [
+      "Aristotle Pagaltzis <pagaltzis@gmx.de>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.101550",
+   "license" : "perl_5",
+   "meta-spec" : {
+      "url" : "http://github.com/dagolden/cpan-meta/",
+      "version" : 2
+   },
+   "name" : "Object-Tiny-Lvalue",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.31"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "http://github.com/ap/Object-Tiny-Lvalue/issues"
+      },
+      "homepage" : "http://github.com/ap/Object-Tiny-Lvalue",
+      "repository" : {
+         "url" : "git://github.com/ap/Object-Tiny-Lvalue"
+      }
+   },
+   "version" : "1.07"
+}
