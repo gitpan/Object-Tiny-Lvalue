@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 package Object::Tiny::Lvalue;
-$Object::Tiny::Lvalue::VERSION = '1.08';
+$Object::Tiny::Lvalue::VERSION = '1.081';
 # ABSTRACT: minimal class builder with lvalue accessors
 
 sub import {
@@ -40,7 +40,7 @@ Object::Tiny::Lvalue - minimal class builder with lvalue accessors
 
 =head1 VERSION
 
-version 1.08
+version 1.081
 
 =head1 SYNOPSIS
 

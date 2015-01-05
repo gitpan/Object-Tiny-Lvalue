@@ -10,7 +10,5 @@ README
 dist.ini
 lib/Object/Tiny/Lvalue.pm
 t/00-compile.t
-t/01_compile.t
-t/02_main.t
-t/03_subclass.t
-t/cpants.t
+t/main.t
+t/subclass.t

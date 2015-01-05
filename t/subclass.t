@@ -1,18 +1,21 @@
-#!/usr/bin/perl
-
-# Simple tests for a simple module
 use strict;
-BEGIN {
-	$|  = 1;
-	$^W = 1;
-}
+use warnings;
 
-use Test::More tests => 13;
+use Test::More 0.88; # for done_testing
 
 # Define a class
 SCOPE: {
 	eval "
+	package Bar;
+
+	sub new {
+		my \$class = shift;
+		return bless { \@_ }, \$class;
+	}
+
 	package Foo;
+
+	\@Foo::ISA = 'Bar';
 
 	use Object::Tiny::Lvalue qw( foo bar );
 	";
@@ -23,7 +26,8 @@ SCOPE: {
 SCOPE: {
 	my $empty = Foo->new;
 	isa_ok( $empty, 'Foo' );
-	isa_ok( $empty, 'Object::Tiny::Lvalue' );
+	isa_ok( $empty, 'Bar' );
+	ok( ! $empty->isa('Object::Tiny::Lvalue'), 'Is not an Object::Tiny::Lvalue' );
 	is( scalar( keys %$empty ), 0, 'Empty object is empty' );
 }
 
@@ -31,21 +35,15 @@ SCOPE: {
 SCOPE: {
 	my $object = Foo->new( foo => 1, bar => 2, baz => 3 );
 	isa_ok( $object, 'Foo' );
-	isa_ok( $object, 'Object::Tiny::Lvalue' );
+	isa_ok( $object, 'Bar' );
 	is( scalar( keys %$object ), 3, 'Object contains expect elements' );
 	is( $object->foo, 1, '->foo ok' );
 	is( $object->bar, 2, '->bar ok' );
 	eval {
 		$object->baz;
 	};
-	ok( $@, '->baz returns an error' );
+	ok( $@, '->bar returns an error' );
 	is( $object->{baz}, 3, '->{baz} does contain value' );
-	$object->foo = 42;
-	is( $object->foo, 42, '->foo(new_value) ok' );
 }
 
-# Trigger the constructor exception
-SCOPE: {
-	eval "package Bar; use Object::Tiny::Lvalue 'bad thing';";
-	ok( $@ =~ /Invalid accessor name/, 'Got expected error' );
-}
+done_testing;
